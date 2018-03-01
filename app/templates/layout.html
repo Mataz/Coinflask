@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% block head %}
+<meta charset=utf-8>
+<title>{% block title %}Welcome{% endblock %} | Coinflask - a Coinmarkets Watcher</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+<div class=box>
+    {% block body_title %}
+      <h1><span>{{ self.title() }}</span></h1>
+    {% endblock %}
+    {% block body %}{% endblock %}
+    <p class=footer>
+        &copy; Copyright 2018 - {{ current_year }} by <a href=https://github.com/Mataz>Thomas Mahieux</a>
+</div>
