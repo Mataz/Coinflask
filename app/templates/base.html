@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% if title %}
+        <title>{{ title }} - Coinmarkets Watcher</title>
+        {% else %}
+        <title>Welcome to Coinflask</title>
+        {% endif %}
+    </head>
+    <body>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
