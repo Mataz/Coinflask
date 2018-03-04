@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 {% block head %}
 <meta charset=utf-8>
-<title>{% block title %}Welcome{% endblock %} | Coinflask - a Coinmarkets Watcher</title>
+<title>{% block title %}Welcome{% endblock %} to Coinflask - a Coinmarkets Watcher</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<h1 id="logo">
+    <a href=""><span>Coinflask</span></a>
+</h1>
 {% endblock %}
 <div class=box>
     {% block body_title %}
-      <h1><span>{{ self.title() }}</span></h1>
+
     {% endblock %}
     {% block body %}{% endblock %}
     <p class=footer>
