@@ -11,7 +11,13 @@
       Coinflask (A cryptomarkets watcher) is a single page website displaying various things about cryptocurrencies. Written in Python with the microframework Flask.
   </blockquote>
   <div class='tables'>
-    <h2>Top 5 increase of the last 24 hours.</h2>
-    <h3>{{ table | safe }}</h3>
+    {% for table in tables %}
+      <h2>{{ titles[loop.index] }}</h2>
+      {{ table | safe }}
+    {% endfor %}
+  </div>
+  <div class='graph'>
+    <h2>Bitcoin changes (30d)</h2>
+    <h3>{{ graph | safe }}</h3>
   </div>
 {% endblock %}
