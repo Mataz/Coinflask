@@ -8,15 +8,17 @@ a:hover      { color: #6D4100; }
 h2           { font-size: 30px; margin: 15px 0 5px 0; }
 h3           { font-size: 24px; margin: 15px 0 5px 0; }
 h4           { font-size: 19px; margin: 15px 0 5px 0; }
-table.dataframe, .dataframe th,
-.dataframe td{ border: none; border-bottom: 1px solid #C8C8C8; border-collapse: collapse;
+table.dataframe { border: none; margin: 0 auto; }
+.dataframe th,
+.dataframe td{ border: none; border-collapse: collapse;
                text-align:left; padding: 10px; margin-bottom: 40px; font-size: 0.9em; }
-.dataframe thead th { background-color: #114358; color: #fff; }
+.dataframe thead th { background-color: #114358; color: hsl(197.7,76%,96%); font-weight: 500; }
 tr:nth-child(odd) { background-color: #eee; }
 tr:nth-child(even){ background-color: #fff; }
 tr:hover          { background-color: #98B2C1; }
 p            { line-height: 1.4; }
-blockquote   { margin: 0; font-style: italic; color: #444; }
+blockquote   { margin: 0; font-style: italic; color: hsl(0, 0%, 40%); font-weight: 500; }
 .footer      { font-size: 13px; color: #888; text-align: right; margin-top: 25px; }
-.tables h2   { font-size: 19px; margin: 15px 0 5px 0; }
-.graph h2    { font-size: 19px; margin: 15px 0 5px 0; }
+.tables h2   { font-size: 19px; margin: 15px 0 5px 0; text-align: center; color: hsl(0, 0%, 17%); font-weight: 600; }
+.graph h2    { display: none; }
+.dataframe th { color: hsl(0, 0%, 17%); font-weight: 600; }
