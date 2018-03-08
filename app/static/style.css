@@ -17,8 +17,12 @@ tr:nth-child(odd) { background-color: #eee; }
 tr:nth-child(even){ background-color: #fff; }
 tr:hover          { background-color: #98B2C1; }
 p            { line-height: 1.4; }
-blockquote   { margin: 0; font-style: italic; color: hsl(0, 0%, 40%); font-weight: 500; }
+blockquote   { background: hsl(0, 0%, 98%); border-bottom: 2.75px solid hsl(198,68%,40%); margin: 0; font-style: italic; color: hsl(0, 0%, 20%); font-weight: 575; }
 .footer      { font-size: 13px; color: #888; text-align: right; margin-top: 25px; }
 .tables h2   { font-size: 19px; margin: 15px 0 5px 0; text-align: center; color: hsl(0, 0%, 17%); font-weight: 600; }
-.graph h2    { display: none; }
+.graphs      { border-top: 6px solid #716DF9; }
+.graphs h2   { font-size: 19px; margin: 15px 0 0 0; text-align: center; color: hsl(0, 0%, 17%); font-weight: 600; }
+.graphs p    { text-align: center; color: hsl(0, 0%, 40%); font-style: italic; font-weight: 400; }
+div.graphs > h3 > img { max-width: 580px; height: auto; display: block; margin: 0 auto; border-bottom: 4px solid #716DF9; }
 .dataframe th { color: hsl(0, 0%, 17%); font-weight: 600; }
+hr           { width: 66%; margin: 60px auto; text-align: center; border: 0; border-top: 1.3px solid hsl(0, 0%, 88%); }
