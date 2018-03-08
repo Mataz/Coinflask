@@ -189,7 +189,7 @@ def thirty_days_chg():
     z = nano_graph['Price']
 
     f, axarr = plt.subplots(3, sharex=True, figsize=(8, 12))
-    # f.suptitle('Bitcoin and NANO changes (30d)')
+    
     plt.xlabel('Date')
     plt.ylabel('Price')
     axarr[0].plot(x)
@@ -205,7 +205,6 @@ def thirty_days_chg():
 
     f.subplots_adjust(hspace=0.3)
 
-    # plt.show()
     plt.savefig(img, format='png', facecolor=f.get_facecolor())
     img.seek(0)
 
