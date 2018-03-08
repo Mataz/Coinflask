@@ -16,8 +16,9 @@
       {{ table | safe }}
     {% endfor %}
   </div>
-  <div class='graph'>
-    <h2>Bitcoin changes (30d)</h2>
-    <h3>{{ graph | safe }}</h3>
+  <div class='graphs'>
+    <h2>Bitcoin, Ethereum and NANO changes (30d)</h2>
+    <p>Here's 30 days of price history for BTC, ETH and NANO.</p>
+    <h3>{{ graphs | safe }}</h3>
   </div>
 {% endblock %}
