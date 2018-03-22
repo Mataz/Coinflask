@@ -6,6 +6,7 @@ import datetime
 import io
 import base64
 import matplotlib.pyplot as plt
+import tweepy as tp
 
 
 def get_top5_inc():
@@ -19,29 +20,32 @@ def get_top5_inc():
     for currency in ordered_data:
         name = currency['long']
         market_cap = float(currency['mktcap'])
-        market_cap_rounded = f'{market_cap:,.2f}'
-        percent_change_24 = currency['cap24hrChange']
+        market_cap_rounded = '$' + f'{market_cap:,.2f}'
+        percent_change_24 = str(currency['cap24hrChange'])
+        percent_formatted = percent_change_24 + '%'
         price = float(currency['price'])
-        price_rounded = f'{price:.2f}'
+        price_rounded = '$' + f'{price:.2f}'
 
         raw_data_increase.setdefault('Name', [])
         raw_data_increase['Name'].append(name)
-        raw_data_increase.setdefault('Market Cap(USD)', [])
-        raw_data_increase['Market Cap(USD)'].append(market_cap_rounded)
+        raw_data_increase.setdefault('Market Cap', [])
+        raw_data_increase['Market Cap'].append(market_cap_rounded)
         raw_data_increase.setdefault('%24hr', [])
-        raw_data_increase['%24hr'].append(percent_change_24)
-        raw_data_increase.setdefault('Price(USD)', [])
-        raw_data_increase['Price(USD)'].append(price_rounded)
+        raw_data_increase['%24hr'].append(percent_formatted)
+        raw_data_increase.setdefault('Price', [])
+        raw_data_increase['Price'].append(price_rounded)
 
     df = pd.DataFrame(raw_data_increase,
-                      columns=['Name', 'Market Cap(USD)', '%24hr', 'Price(USD)'])
+                      columns=['Name', 'Market Cap', '%24hr', 'Price'])
 
     df.to_csv('top5_table.csv', index=False)
     data_read = pd.read_csv('top5_table.csv')
     data_read.set_index(['Name'], inplace=True)
     data_read.index.name = None
-    data_html = data_read.to_html()
-    return data_html
+    
+    html = data_read.style.set_caption('Top 5 by percent increase in the last 24 hours.').render()
+
+    return html
 
 
 def get_top5_mktcap():
@@ -67,12 +71,14 @@ def get_top5_mktcap():
 
     df = pd.DataFrame(raw_data_increase,
                       columns=['Name', 'Market Cap', 'Price'])
+
     df.to_csv('top5_mktcap.csv', index=False)
     data_read = pd.read_csv('top5_mktcap.csv')
     data_read.set_index(['Name'], inplace=True)
     data_read.index.name = None
-    html_data = data_read.to_html()
-    return html_data
+    html = data_read.style.set_caption('Top 5 by Market Capitalization.').render()
+
+    return html
 
 
 def get_top5_volume():
@@ -98,12 +104,15 @@ def get_top5_volume():
 
     df = pd.DataFrame(raw_data_increase,
                       columns=['Name', '24h Trade Volume', 'Price'])
+
     df.to_csv('top5_volume.csv', index=False)
     data_read = pd.read_csv('top5_volume.csv')
     data_read.set_index(['Name'], inplace=True)
     data_read.index.name = None
-    html_data = data_read.to_html()
-    return html_data
+    
+    html = data_read.style.set_caption('Top 5 by 24h Trade Volume.').render()
+
+    return html
 
 
 def thirty_days_chg():
@@ -189,7 +198,7 @@ def thirty_days_chg():
     z = nano_graph['Price']
 
     f, axarr = plt.subplots(3, sharex=True, figsize=(8, 12))
-    
+    # f.suptitle('Bitcoin and NANO changes (30d)')
     plt.xlabel('Date')
     plt.ylabel('Price')
     axarr[0].plot(x)
@@ -205,6 +214,7 @@ def thirty_days_chg():
 
     f.subplots_adjust(hspace=0.3)
 
+    # plt.show()
     plt.savefig(img, format='png', facecolor=f.get_facecolor())
     img.seek(0)
 
@@ -213,16 +223,38 @@ def thirty_days_chg():
     return '<img src="data:image/png;base64,{}">'.format(plot_url)
 
 
+def get_new_tweets():
+    consumer_key = 'PAX4laqFCu9HKlaIjyi72VvTr'
+    consumer_secret = 'MHGAMwdy8nTb2qqMiruJXEgDE8MKU8LrJaLsLI5calVrQ5dnT6'
+    access_token = '956100904872304640-1AJYBegA233mXXdGMhOpaf5Gaoquv2P'
+    access_secret = 'vq5BCQIhNtSJFh68qiB0Z5lL87q3BGxBncWXrdOfime95'
+
+    auth = tp.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_secret)
+    api = tp.API(auth)
+
+    new_tweets = api.user_timeline(id='coindesk', count=200, exclude_replies=True,
+                                   include_rts=False, tweet_mode='extended')
+    tweets = new_tweets[:3]
+
+    oembed = [api.get_oembed(id=t.id, hide_media=True, hide_thread=True) for t in tweets]
+
+    tweet_html = [d['html'] for d in oembed]
+
+    return tweet_html
+
+
 @app.route('/')
 def index():
     top5_percent = get_top5_inc()
     top5_mktcap = get_top5_mktcap()
     top5_volume = get_top5_volume()
     graphs = thirty_days_chg()
-    return render_template('index.html', tables=[top5_percent, top5_mktcap, top5_volume],
-                           graphs=graphs,
-                           titles=['coins', 'Top 5 by percent increase in the last 24 hours.',
-                                   'Top 5 by Market Capitalization.', 'Top 5 by 24h Trade Volume.'])
+    tweets = get_new_tweets()
+    return render_template('index.html',
+                           tweets=tweets,
+                           tables=[top5_percent, top5_mktcap, top5_volume],
+                           graphs=graphs)
 
 
 if __name__ == '__main__':
