@@ -38,45 +38,7 @@ h4           {
         font-size: 19px;
         margin: 15px 0 5px 0;
 }
-div.tables   {
-        display: flex;
-}
-table.dataframe {
-        border: none;
-        margin: 0 auto;
-        box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
-        flex: 1;
-}
-.tables h2   {
-        font-size: 19px;
-        text-align: center;
-        color: hsl(0, 0%, 17%);
-        font-weight: 600;
-        flex: 1;
-}
-.dataframe th,
-.dataframe td {
-        border: none;
-        border-collapse: collapse;
-        text-align:left;
-        padding: 10px;
-        margin-bottom: 40px;
-        font-size: 0.9em;
-}
-.dataframe thead th {
-        background-color: #114358;
-        color: hsla(0, 0%, 100%, 0.9);
-        font-weight: 500;
-}
-tr:nth-child(odd) {
-        background-color: #eee;
-}
-tr:nth-child(even){
-        background-color: #fff;
-}
-tr:hover          {
-        background-color: #98B2C1;
-}
+
 p            {
         line-height: 1.4;
 }
@@ -118,17 +80,8 @@ div.graphs > h3 > img {
         margin: 0 auto;
         border-bottom: 4px solid #716DF9;
 }
-.dataframe th {
-        color: hsl(0, 0%, 17%);
-        font-weight: 600;
-}
-hr           {
-        width: 66%;
-        margin: 60px auto;
-        text-align: center;
-        border: 0;
-        border-top: 1.3px solid hsl(0, 0%, 88%);
-}
+
+
 div.tweets {
         display: flex;
         width: 100%;
@@ -139,4 +92,52 @@ div.tweets {
         flex: 1;
         padding: 1em;
         margin: 10px 10px;
+}
+
+
+div.tables   {
+        display: flex;
+        width: 100%;
+        margin: 10px auto;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 40px;
+}
+table {
+        flex: 1;
+        margin: 10px 10px;
+        border: none;
+        margin: 0 auto;
+        padding: 8px;
+}
+caption {
+        font-size: 16px;
+        margin: 15px 0 0 0;
+        text-align: center;
+        color: hsl(0, 0%, 17%);
+        font-weight: 700;
+        padding-bottom: 15px;
+}
+
+th, td {
+        border: none;
+        border-collapse: collapse;
+        text-align:left;
+        padding: 10px;
+        margin-bottom: 40px;
+        font-size: 0.9em;
+}
+thead > tr {
+        background-color: #114358;
+        color: hsla(0, 0%, 100%, 0.9);
+        font-weight: 500;
+}
+tbody > tr:nth-child(odd) {
+        background-color: #eee;
+}
+tbody > tr:nth-child(even){
+        background-color: #fff;
+}
+tbody > tr:hover          {
+        background-color: #98B2C1;
 }
