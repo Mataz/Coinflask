@@ -224,10 +224,10 @@ def thirty_days_chg():
 
 
 def get_new_tweets():
-    consumer_key = 'PAX4laqFCu9HKlaIjyi72VvTr'
-    consumer_secret = 'MHGAMwdy8nTb2qqMiruJXEgDE8MKU8LrJaLsLI5calVrQ5dnT6'
-    access_token = '956100904872304640-1AJYBegA233mXXdGMhOpaf5Gaoquv2P'
-    access_secret = 'vq5BCQIhNtSJFh68qiB0Z5lL87q3BGxBncWXrdOfime95'
+    consumer_key = 'YOU_CONSUMER_KEY'
+    consumer_secret = 'YOUR_CONSUMER_SECRET'
+    access_token = 'YOUR_ACCESS_TOKEN'
+    access_secret = 'YOUR_ACCESS_SECRET'
 
     auth = tp.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_secret)
