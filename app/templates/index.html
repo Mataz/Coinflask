@@ -10,6 +10,11 @@
   <blockquote>
       Coinflask (A cryptomarkets watcher) is a single page website displaying various things about cryptocurrencies. Written in Python with the microframework Flask.
   </blockquote>
+  <div class='tweets'>
+    {% for tweet in tweets %}
+      {{ tweet | safe }}
+    {% endfor %}
+  </div>
   <div class='tables'>
     {% for table in tables %}
       <!--<h2>{{ titles[loop.index] }}</h2>-->
